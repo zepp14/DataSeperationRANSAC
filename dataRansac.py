@@ -8,7 +8,7 @@ import scipy.stats
 
 
 
-def splitData(X_array,Y_array, MAXITER = 200):
+def splitData(X_array,Y_array, MAXITER = 450):
     #Loop through RANSAC algo
     counter = 0
     szData =  len(Y_array)
@@ -116,22 +116,27 @@ def splitData(X_array,Y_array, MAXITER = 200):
 
 ## Example Use ##
 
-pathData_1 = "".join([os.getenv("HOME"),"/DataSeperation/w1.npy"])
+pathData_1 = "".join([os.getenv("HOME"),"/DataSeperationRANSAC/w1.npy"])
 data1 = np.load(pathData_1)
 
-pathData_2 = "".join([os.getenv("HOME"),"/DataSeperation/w3.npy"])
+pathData_2 = "".join([os.getenv("HOME"),"/DataSeperationRANSAC/w3.npy"])
 data2 = np.load(pathData_2)
 
-xAxis_Path = "".join([os.getenv("HOME"),"/DataSeperation/gmm.npy"])
+xAxis_Path = "".join([os.getenv("HOME"),"/DataSeperationRANSAC/gmm.npy"])
 xData = np.load(xAxis_Path )
 
 
 DataGroup1, DataGroup2 = splitData(xData, data2)
 
-
+DataGroup3, DataGroup4 = splitData(xData, data1)
 
 fig, ax = plt.subplots()
+fig1, ax1 = plt.subplots()
 
 ax.plot(DataGroup1[:,0],DataGroup1[:,1])
 ax.plot(DataGroup2[:,0],DataGroup2[:,1])
+
+ax1.plot(DataGroup3[:,0],DataGroup3[:,1])
+ax1.plot(DataGroup4[:,0],DataGroup4[:,1])
+
 plt.show()
